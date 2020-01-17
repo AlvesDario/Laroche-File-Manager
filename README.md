@@ -17,3 +17,14 @@ Elaborar uma estruturação para armazenar o texto de forma lógica.
 
 Criar ferramenta para manipulação de arquivos do google.
 
+
+# Como começar?
+
+## Requisitos:
+
+tenha nodejs e npm ou yarn instalados
+
+use `npm install` para instalar as dependencias do projeto
+
+gerar credenciais usando `node services/credsgen.js`
+
