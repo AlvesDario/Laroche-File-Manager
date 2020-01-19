@@ -1,8 +1,5 @@
 const fs = require('fs');
 
-const MEMORY_MAX = 15;
-const MEMORY_MAX_MB = MEMORY_MAX * 1048576;
-
 const help = () => console.log("usage: b64.js <command> [<arg1>] [<arg2>]\n\tencode\tEncode a file to another file.\n\tdecode\tDecode a file to another file.");
 
 const printPercentage = (atual, fim) => 
@@ -16,11 +13,7 @@ const encode = (entrada, saida) => {
 }
 
 const decode = (entrada, saida) => {
-    let encodedFile = fs.readFileSync(entrada);
-    fs.writeFileSync(saida, encodedFile.toString(), {encoding: 'base64'});
+    let destineFile = fs.createWriteStream(saida, {encoding: 'base64'});
+    let originalFile = fs.createReadStream(entrada,{encoding: 'binary'});
+    originalFile.pipe(destineFile);
 }
-
-
-encode('image.jpg','bbb')
-// console.log(fs.statSync('bbb'))
-// decode('bbb', 'ccc.jpg');
