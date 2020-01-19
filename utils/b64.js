@@ -10,14 +10,9 @@ const printPercentage = (atual, fim) =>
 
 
 const encode = (entrada, saida) => {
-    let encoded_string = "";
-    let iterations = Math.ceil(fs.statSync(entrada).size/MEMORY_MAX_MB);
-    for(let x = 0; x < iterations;x++){
-        printPercentage(x, iterations);
-        let originalFile = fs.createReadStream(entrada, {start: x , end: iterations});
-        let destineFile = fs.createWriteStream(saida);
-        originalFile.on('data', (data) => destineFile.write(data.toString('base64')));
-    }
+    let destineFile = fs.createWriteStream(saida);
+    let originalFile = fs.createReadStream(entrada, {encoding:'base64'});
+    originalFile.pipe(destineFile);
 }
 
 const decode = (entrada, saida) => {
@@ -25,4 +20,7 @@ const decode = (entrada, saida) => {
     fs.writeFileSync(saida, encodedFile.toString(), {encoding: 'base64'});
 }
 
-encode('image.jpg','image1.b64');
+
+encode('image.jpg','bbb')
+// console.log(fs.statSync('bbb'))
+// decode('bbb', 'ccc.jpg');
